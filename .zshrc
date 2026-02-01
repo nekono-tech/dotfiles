@@ -7,7 +7,8 @@ export ZSH="$HOME/.oh-my-zsh"
 
 # ターミナルの見た目（テーマ）の設定
 # robbyrussell: デフォルトのシンプルで使いやすいテーマ
-ZSH_THEME="robbyrussell"
+#ZSH_THEME="robbyrussell"
+ZSH_THEME="eastwood"
 
 # 拡張機能（プラグイン）の有効化
 # git: gitコマンドの補完やエイリアス
@@ -32,3 +33,6 @@ eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 # nodenv の初期化
 eval "$(nodenv init -)"
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - zsh)"
