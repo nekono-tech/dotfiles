@@ -27,7 +27,13 @@ compinit
 # ============================================================
 # History設定
 # ============================================================
-HISTFILE=~/.zsh_history
+# devcontainer で /commandhistory が用意されていればそこに保存（リビルド後も残る）
+# それ以外（ローカル VM など）は従来どおりホームに保存
+if [ -d /commandhistory ] && [ -w /commandhistory ]; then
+  HISTFILE=/commandhistory/.zsh_history
+else
+  HISTFILE=~/.zsh_history
+fi
 HISTSIZE=50000
 SAVEHIST=50000
 setopt EXTENDED_HISTORY
