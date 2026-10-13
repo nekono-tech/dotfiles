@@ -1,0 +1,66 @@
+# ============================================================
+# PATH（mise.run でインストールした mise を見つけるため最初に）
+# ============================================================
+export PATH="$HOME/.local/bin:$PATH"
+
+# ============================================================
+# mise（starship / carapace を PATH に載せるので早めに）
+# hook-env を一度呼んで、この時点で PATH を反映させる
+# ============================================================
+if command -v mise >/dev/null 2>&1; then
+  eval "$(mise activate zsh)"
+  eval "$(mise hook-env -s zsh)"
+fi
+
+# ============================================================
+# zsh プラグイン（mise bootstrap の [bootstrap.repos] で clone した場所）
+# ============================================================
+ZSH_PLUGIN_DIR="$HOME/.local/share/zsh/plugins"
+
+# ============================================================
+# 補完システム初期化
+# ============================================================
+[ -d "$ZSH_PLUGIN_DIR/zsh-completions/src" ] && fpath=("$ZSH_PLUGIN_DIR/zsh-completions/src" $fpath)
+autoload -Uz compinit
+compinit
+
+# ============================================================
+# History設定
+# ============================================================
+HISTFILE=~/.zsh_history
+HISTSIZE=50000
+SAVEHIST=50000
+setopt EXTENDED_HISTORY
+setopt HIST_EXPIRE_DUPS_FIRST
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_SPACE
+setopt HIST_VERIFY
+setopt SHARE_HISTORY
+setopt APPEND_HISTORY
+setopt INC_APPEND_HISTORY
+
+# ============================================================
+# zsh-autosuggestions
+# ============================================================
+[ -r "$ZSH_PLUGIN_DIR/zsh-autosuggestions/zsh-autosuggestions.zsh" ] && \
+  source "$ZSH_PLUGIN_DIR/zsh-autosuggestions/zsh-autosuggestions.zsh"
+
+# ============================================================
+# carapace補完
+# ============================================================
+if command -v carapace >/dev/null 2>&1; then
+  source <(carapace _carapace)
+fi
+
+# ============================================================
+# zsh-syntax-highlighting（必ずファイル末尾付近でsource）
+# ============================================================
+[ -r "$ZSH_PLUGIN_DIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] && \
+  source "$ZSH_PLUGIN_DIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+
+# ============================================================
+# starship プロンプト（一番最後）
+# ============================================================
+if command -v starship >/dev/null 2>&1; then
+  eval "$(starship init zsh)"
+fi

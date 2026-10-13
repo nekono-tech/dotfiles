@@ -1,0 +1,41 @@
+# ============================================================
+# 個人の dotfiles 用 bootstrap 定義
+#
+# ※ PHP / Node などプロジェクトのランタイムはここに書かない
+#    （devcontainer.json や各プロジェクトの mise.toml に任せる）
+# ============================================================
+
+# ------------------------------------------------------------
+# OS パッケージ（apt）
+# ------------------------------------------------------------
+[bootstrap.packages]
+"apt:zsh" = "latest"
+"apt:git" = "latest"
+
+# ------------------------------------------------------------
+# zsh プラグイン
+# Homebrew は使わず git clone で入れる
+# ------------------------------------------------------------
+[bootstrap.repos]
+"~/.local/share/zsh/plugins/zsh-completions"         = { url = "https://github.com/zsh-users/zsh-completions.git" }
+"~/.local/share/zsh/plugins/zsh-autosuggestions"     = { url = "https://github.com/zsh-users/zsh-autosuggestions.git" }
+"~/.local/share/zsh/plugins/zsh-syntax-highlighting" = { url = "https://github.com/zsh-users/zsh-syntax-highlighting.git" }
+
+# ------------------------------------------------------------
+# dotfiles
+# home/ 以下を ~ に1ファイルずつ symlink（dot-xxx → .xxx）
+# ------------------------------------------------------------
+[dotfiles]
+"~" = { source = "home", mode = "symlink-each", dot_prefix = true }
+
+# ------------------------------------------------------------
+# ログインシェル
+# ------------------------------------------------------------
+[bootstrap.user]
+login_shell = "/usr/bin/zsh"
+
+# ------------------------------------------------------------
+# シェル周りの CLI ツール（どの環境でも入れたいものだけ）
+# ------------------------------------------------------------
+[tools]
+starship = "latest"
