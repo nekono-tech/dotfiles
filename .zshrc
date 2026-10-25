@@ -24,6 +24,10 @@ zstyle ':completion:*' menu select
 # 大文字小文字を区別しない補完
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 
+# 単語の途中でも補完する / 補完したらカーソルを末尾へ送る
+setopt complete_in_word
+setopt always_to_end
+
 ##############################################################
 # 履歴
 ##############################################################
@@ -50,6 +54,28 @@ zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
 bindkey '^[[A' up-line-or-beginning-search
 bindkey '^[[B' down-line-or-beginning-search
+
+# Home / End（端末によって送る文字列が違うので主要な形を登録しておく）
+bindkey '^[[H'  beginning-of-line
+bindkey '^[OH'  beginning-of-line
+bindkey '^[[1~' beginning-of-line
+bindkey '^[[F'  end-of-line
+bindkey '^[OF'  end-of-line
+bindkey '^[[4~' end-of-line
+
+# Delete / Ctrl+Delete
+bindkey '^[[3~'   delete-char
+bindkey '^[[3;5~' kill-word
+
+# Ctrl + ← → で単語単位に移動
+bindkey '^[[1;5C' forward-word
+bindkey '^[[1;5D' backward-word
+
+# Ctrl+Backspace で直前の単語を削除
+bindkey '^H' backward-kill-word
+
+# Shift+Tab で補完候補を逆順に辿る
+bindkey '^[[Z' reverse-menu-complete
 
 ##############################################################
 # エイリアス / 色付け
