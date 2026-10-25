@@ -52,12 +52,24 @@ bindkey '^[[A' up-line-or-beginning-search
 bindkey '^[[B' down-line-or-beginning-search
 
 ##############################################################
-# エイリアス
+# エイリアス / 色付け
 ##############################################################
+
+# ls の色（実行可能ファイル・ディレクトリ・シンボリックリンクなどの色分け）。
+# oh-my-zsh が設定していた分を明示的に書いている
+eval "$(dircolors -b)"
+alias ls='ls --color=auto'
 
 alias ll='ls -lh'
 alias la='ls -lAh'
 alias l='ls -CF'
+
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+
+# 補完候補にも ls と同じ色を使う
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 ##############################################################
 # PATH / 環境変数
