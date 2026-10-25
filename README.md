@@ -34,6 +34,8 @@ cd ~/dotfiles
 ## メモ
 
 - プロンプトは oh-my-zsh から starship に移行済み。`~/.oh-my-zsh` は不要。
+- starship の見た目は公式プリセット **Tokyo Night**。Nerd Font 前提なので、端末側のフォントも
+  Nerd Font にしておく（化ける場合は `starship preset no-nerd-font` を参考に記号を差し替える）。
 - 言語ランタイムの管理ツールは現在入れていない（pyenv / nodenv / mise はすべて削除済み）。
   node や python が必要になったら [mise](https://mise.jdx.dev/) を入れ直し、
   `~/.config/mise/config.toml` をこのリポジトリの管理対象に戻す。
