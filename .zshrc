@@ -60,20 +60,11 @@ alias la='ls -lAh'
 alias l='ls -CF'
 
 ##############################################################
-# 外部ツールの初期化設定
+# PATH / 環境変数
 ##############################################################
 
-# nodenv の初期化
-eval "$(nodenv init -)"
-
-# pyenv の初期化
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init - zsh)"
-
-# uv / mise
-. "$HOME/.local/bin/env"
-eval "$(~/.local/bin/mise activate zsh)"
+# ~/.local/bin（claude など）を PATH に追加
+export PATH="$HOME/.local/bin:$PATH"
 
 export PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:/usr/share/pkgconfig:${PKG_CONFIG_PATH:-}"
 

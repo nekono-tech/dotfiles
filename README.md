@@ -6,7 +6,7 @@ WSL2 (Ubuntu) + zsh + starship の環境設定。
 
 | リポジトリ内 | リンク先 | 内容 |
 | --- | --- | --- |
-| `.zshrc` | `~/.zshrc` | zsh の設定（履歴・補完・エイリアス・各種ツールの初期化） |
+| `.zshrc` | `~/.zshrc` | zsh の設定（履歴・補完・エイリアス・PATH） |
 | `.config/starship.toml` | `~/.config/starship.toml` | プロンプト（starship）の設定 |
 
 ## セットアップ
@@ -21,9 +21,9 @@ cd ~/dotfiles
 
 ## 前提ツール
 
-`.zshrc` が初期化しているもの。入っていない環境では該当行を消すか、先にインストールする。
+`.zshrc` が参照しているもの。入っていない環境では該当行を消すか、先にインストールする。
 
-- [Homebrew](https://brew.sh/)（他ツールの PATH を通すため最初に実行）
+- [Homebrew](https://brew.sh/)（PATH と補完パスを通すため最初に実行）
 - [starship](https://starship.rs/) … プロンプト
 - `zsh-autosuggestions` / `zsh-syntax-highlighting` … brew 管理
 
@@ -31,10 +31,11 @@ cd ~/dotfiles
   brew install starship zsh-autosuggestions zsh-syntax-highlighting
   ```
 
-- nodenv / pyenv / mise / uv … 言語バージョン管理
-
 ## メモ
 
 - プロンプトは oh-my-zsh から starship に移行済み。`~/.oh-my-zsh` は不要。
+- 言語ランタイムの管理ツールは現在入れていない（pyenv / nodenv / mise はすべて削除済み）。
+  node や python が必要になったら [mise](https://mise.jdx.dev/) を入れ直し、
+  `~/.config/mise/config.toml` をこのリポジトリの管理対象に戻す。
 - 補完キャッシュは `~/.cache/zsh/zcompdump-<version>` に置いてホーム直下を汚さない。
 - `zsh-syntax-highlighting` は他のプラグインより後に読み込む必要があるため、`.zshrc` の末尾付近で source している。
