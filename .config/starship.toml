@@ -1,0 +1,37 @@
+# Starship の設定（リファレンス: https://starship.rs/config/）
+
+# プロンプトの前に空行を入れる
+add_newline = true
+
+[character]
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](bold red)"
+
+[directory]
+# 深い階層は手前 4 つだけ表示する
+truncation_length = 4
+truncation_symbol = "…/"
+
+[git_branch]
+symbol = " "
+
+[git_status]
+# 変更あり / stash あり などを記号で表示
+conflicted = "="
+ahead = "⇡${count}"
+behind = "⇣${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+untracked = "?${count}"
+stashed = "$"
+modified = "!${count}"
+staged = "+${count}"
+renamed = "»${count}"
+deleted = "✘${count}"
+
+[cmd_duration]
+# 2 秒以上かかったコマンドは実行時間を表示
+min_time = 2000
+
+[python]
+# pyenv / uv を使うのでバージョン表示を有効にしておく
+symbol = " "
